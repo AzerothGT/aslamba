@@ -2,6 +2,19 @@ var preloader = document.getElementById('preloader');
 window.addEventListener('load', function() {
     preloader.style.display = 'none';
 });
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target);
+        } 
+    });
+});
+
+const hiddenElements = document.querySelectorAll('.hidden');
+hiddenElements.forEach((el) => observer.observe(el));
+
 function showsidebar(){
     const sidebar = document.querySelector(".sidebar");
     sidebar.style.display = "flex";
